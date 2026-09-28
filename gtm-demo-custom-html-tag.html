@@ -1,0 +1,48 @@
+<!--
+  ============================================================
+  GTM – TAG DEMO (Custom HTML) – DOAR PENTRU CURS
+  ============================================================
+  Ce face:   NIMIC real. Nu trimite date nicăieri.
+             Doar scrie în consolă și împinge un eveniment demo
+             în dataLayer, ca să fie vizibil în GTM Preview.
+  Cum îl folosești:
+    1. GTM > Tags > New > Tag Configuration > Custom HTML
+    2. Lipește tot codul de mai jos (inclusiv <script>)
+    3. Trigger: All Pages (Page View)
+    4. Preview > deschide site-ul > F12 > Console
+  ============================================================
+-->
+<script>
+(function () {
+  // 1. Configurare demo (valori fictive)
+  var DEMO_CONFIG = {
+    tagName: 'Optirank Demo Tag',
+    trackingId: 'DEMO-000000',   // ID fals, doar ilustrativ
+    debug: true
+  };
+
+  // 2. Citim date de context folosind variabile GTM built-in
+  //    (activează-le în Variables > Configure dacă nu apar)
+  var pageData = {
+    url: {{Page URL}},
+    path: {{Page Path}},
+    referrer: {{Referrer}},
+    timestamp: new Date().toISOString()
+  };
+
+  // 3. "Trimitem" hit-ul – de fapt doar îl afișăm în consolă
+  if (DEMO_CONFIG.debug) {
+    console.log('%c[' + DEMO_CONFIG.tagName + '] a rulat', 'color:#fff;background:#4285f4;padding:2px 6px;border-radius:3px');
+    console.table(pageData);
+  }
+
+  // 4. Împingem un eveniment demo în dataLayer
+  //    -> apare în Preview mode ca "demo_tag_fired"
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'demo_tag_fired',
+    demo_tracking_id: DEMO_CONFIG.trackingId,
+    demo_page_path: pageData.path
+  });
+})();
+</script>
